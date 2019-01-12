@@ -6,8 +6,8 @@ function _<%= executable_name %><%= context_name %> {
       "-<%= option.aliases[0]%>=[<%= option.banner %>]"
     <%- end -%>
   <%- end -%>
-  "-h[Show help information]" \
-  "--help[Show help information]" \
-  "1: :_commands" \
-  "*::arg:->args"/.
+    "-h[Show help information]" \
+    "--help[Show help information]" \
+    "1: :_commands" \
+    "*::arg:->args"/.
 }

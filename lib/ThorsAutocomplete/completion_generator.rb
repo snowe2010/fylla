@@ -38,9 +38,9 @@ module ThorExtensions
               result = if command.is_a? ParsedSubcommand
                          class_options = (class_options + command.class_options).uniq
                          builder += recurse(command.commands, context_name, class_options, executable_name)
-                         create_completion_string(get_subcommand_template_file, binding)
+                         create_completion_string(subcommand_template_file, binding)
                        else
-                         create_completion_string(get_command_template_file, binding)
+                         create_completion_string(command_template_file, binding)
                        end
               builder += result
             end
@@ -59,12 +59,20 @@ module ThorExtensions
           template.result(bind)
         end
 
-        def get_command_template_file
-          File.read(File.join(__dir__, "command.erb"))
+        def command_template_file
+          read_template "command"
         end
 
-        def get_subcommand_template_file
-          File.read(File.join(__dir__, "subcommand.erb"))
+        def subcommand_template_file
+          read_template "subcommand"
+        end
+
+        def help_template_file
+          read_template "help.erb"
+        end
+
+        def read_template(template_name)
+          File.read(File.join(__dir__, "erb_templates/#{template_name}.erb"))
         end
       end
     end
