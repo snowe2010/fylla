@@ -1,4 +1,7 @@
 require 'fylla/version'
+require 'fylla/completion_generator'
+require 'fylla/parsed_command'
+require 'fylla/parsed_subcommand'
 require 'thor'
 
 #

@@ -15,7 +15,6 @@ class CLI < Thor
   subcommand "sub", Subcommand
 
   desc "generate_completions", "generate completions"
-
   def generate_completions
     puts Fylla.zsh_completion(self)
   end
