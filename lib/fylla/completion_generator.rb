@@ -15,27 +15,30 @@ module Fylla
       #
       # Contains the methods +zsh_completion+
       module ClassMethods
+        def map_to_completion_string(commands,
+                                     context = '',
+                                     class_options = [],
+                                     executable_name = '')
+          builder = ''
+          commands.each do |command|
+            context_name = "#{context}#{command.name.nil? || command.name.empty? ? '' : "_#{command.name}"}"
+            result = if command.is_a? ParsedSubcommand
+                       class_options = (class_options + command.class_options).uniq
+                       builder += map_to_completion_string(command.commands, context_name, class_options, executable_name)
+                       create_completion_string(subcommand_template_file, binding)
+                     else
+                       create_completion_string(command_template_file, binding)
+                     end
+            builder += result
+          end
+          builder
+        end
+
         def zsh_completion(executable_name)
           command = create_command_map commands, subcommand_classes
 
-          def recurse(commands, context = '', class_options = [], executable_name = '')
-            builder = ''
-            commands.each do |command|
-              context_name = "#{context}#{command.name.nil? || command.name.empty? ? '' : "_#{command.name}"}"
-              result = if command.is_a? ParsedSubcommand
-                         class_options = (class_options + command.class_options).uniq
-                         builder += recurse(command.commands, context_name, class_options, executable_name)
-                         create_completion_string(subcommand_template_file, binding)
-                       else
-                         create_completion_string(command_template_file, binding)
-                       end
-              builder += result
-            end
-            builder
-          end
-
           # template = ERB.new(help_template, nil, '-<>')
-          builder = recurse [command], executable_name
+          builder = map_to_completion_string [command], executable_name
           completion = "#compdef _#{executable_name} #{executable_name}\n"
           completion += builder
           completion
