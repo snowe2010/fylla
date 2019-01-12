@@ -1,7 +1,7 @@
 class ParsedSubcommand
   attr_accessor :name, :description, :commands, :class_options
 
-  def initalize(name, description, commands, class_options)
+  def initialize(name, description, commands, class_options)
     @name = name
     @description = description
     @commands = commands
