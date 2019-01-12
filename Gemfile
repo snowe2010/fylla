@@ -1,4 +1,4 @@
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in ThorsAutocomplete.gemspec
+# Specify your gem's dependencies in Fylla.gemspec
 gemspec

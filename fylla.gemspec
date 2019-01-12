@@ -1,18 +1,18 @@
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "ThorsAutocomplete/version"
+require "fylla/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "ThorsAutocomplete"
-  spec.version = ThorsAutocomplete::VERSION
+  spec.name = "Fylla"
+  spec.version = Fylla::VERSION
   spec.authors = ["Tyler Thrailkill"]
   spec.email = ["tyler.b.thrailkill@gmail.com"]
 
   spec.summary = %q{Adds functions for generating autocomplete scripts for Thor applications}
   spec.description = %q{
-  Thor's Autocomplete generates zsh and bash autocomplete scripts for Thor CLI applications.
+  Fylla generates zsh and bash autocomplete scripts for Thor CLI applications.
   }
-  spec.homepage = "https://github.com/snowe2010/thors-autocomplete"
+  spec.homepage = "https://github.com/snowe2010/fylla"
   spec.license = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
     spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
     spec.metadata["homepage_uri"] = spec.homepage
-    spec.metadata["source_code_uri"] = "https://github.com/snowe2010/thors-autocomplete"
+    spec.metadata["source_code_uri"] = "https://github.com/snowe2010/fylla"
     spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
   else
     raise "RubyGems 2.0 or newer is required to protect against " \

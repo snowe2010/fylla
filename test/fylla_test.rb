@@ -1,9 +1,9 @@
-require_relative "test_helper"
+require_relative 'test_helper'
 require_relative 'cli'
 
-class ThorsAutocompleteTest < Minitest::Test
+class FyllaTest < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::ThorsAutocomplete::VERSION
+    refute_nil ::Fylla::VERSION
   end
 
   def test_cli_start_noargs
@@ -13,14 +13,14 @@ class ThorsAutocompleteTest < Minitest::Test
 
   def test_cli_start_subcommand_plain
     ARGV.clear
-    ARGV << "sub"
-    assert_output(/ThorsAutocomplete_test.rb sub help \[COMMAND\]/) {CLI.start(ARGV)}
+    ARGV << 'sub'
+    assert_output(/fylla_test.rb sub help \[COMMAND\]/) {CLI.start(ARGV)}
   end
 
   def test_cli_start_subcommand_noopts
     ARGV.clear
-    ARGV << "sub"
-    ARGV << "noopts"
+    ARGV << 'sub'
+    ARGV << 'noopts'
     assert_output("noopts\n") {CLI.start(ARGV)}
   end
 

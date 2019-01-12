@@ -1,6 +1,6 @@
-require "ThorsAutocomplete/version"
+require "fylla/version"
 
-module ThorsAutocomplete
+module Fylla
   class Error < StandardError;
   end
   # Your code goes here...

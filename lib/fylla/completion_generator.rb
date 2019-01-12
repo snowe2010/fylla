@@ -2,7 +2,7 @@ require_relative 'parsed_command'
 require_relative 'parsed_subcommand'
 require 'erb'
 
-module ThorExtensions
+module Fylla
   module Thor
     module CompletionGenerator
       def self.prepended(base)
@@ -11,7 +11,7 @@ module ThorExtensions
 
       module ClassMethods
         def recursively_find_commands(command_map, subcommand_map)
-          map = Hash[command_map.map {|k, v| [v, subcommand_map[k]]}]
+          map = Hash[command_map.map { |k, v| [v, subcommand_map[k]] }]
           map.map do |command, subcommand_class|
             if subcommand_class.nil?
               ParsedCommand.new(command.ancestor_name, command.description, command.name, command.options.values)
@@ -24,17 +24,17 @@ module ThorExtensions
 
         def create_command_map(command_map, subcommand_map)
           command_map = recursively_find_commands command_map, subcommand_map
-          ParsedSubcommand.new(nil, "", command_map, [])
+          ParsedSubcommand.new(nil, '', command_map, [])
         end
 
         def zsh_completion
-          executable_name = "test"
+          executable_name = 'test'
           command = create_command_map commands, subcommand_classes
 
-          def recurse(commands, context = "", class_options = [], executable_name = "")
-            builder = ""
+          def recurse(commands, context = '', class_options = [], executable_name = '')
+            builder = ''
             commands.each do |command|
-              context_name = "#{context}#{command.name.nil? || command.name.empty? ? "" : "_#{command.name}"}"
+              context_name = "#{context}#{command.name.nil? || command.name.empty? ? '' : "_#{command.name}"}"
               result = if command.is_a? ParsedSubcommand
                          class_options = (class_options + command.class_options).uniq
                          builder += recurse(command.commands, context_name, class_options, executable_name)
@@ -60,15 +60,15 @@ module ThorExtensions
         end
 
         def command_template_file
-          read_template "command"
+          read_template 'command'
         end
 
         def subcommand_template_file
-          read_template "subcommand"
+          read_template 'subcommand'
         end
 
         def help_template_file
-          read_template "help.erb"
+          read_template 'help.erb'
         end
 
         def read_template(template_name)

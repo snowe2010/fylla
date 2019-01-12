@@ -21,4 +21,4 @@ class CLI < Thor
   end
 end
 
-Thor.prepend ThorExtensions::Thor::CompletionGenerator
+Thor.prepend Fylla::Thor::CompletionGenerator
