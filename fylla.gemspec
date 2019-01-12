@@ -10,14 +10,11 @@ Gem::Specification.new do |spec|
   spec.email = ['tyler.b.thrailkill@gmail.com']
 
   spec.summary = 'Adds functions for generating autocomplete scripts for Thor applications'
-  spec.description = '
-  Fylla generates zsh and bash autocomplete scripts for Thor CLI applications.
-  '
+  spec.description = 'Fylla generates zsh and bash autocomplete scripts for Thor CLI applications.'
   spec.homepage = 'https://github.com/snowe2010/fylla'
   spec.license = 'MIT'
 
   spec.metadata['yard.run'] = 'yri' # use "yard" to build full HTML docs.
-  # spec.metadata['changelog_uri'] = "TODO: Put your gem's CHANGELOG.md URL here."
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -35,7 +32,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'minitest', '~> 5.0'
   spec.add_development_dependency 'minitest-hooks', '~> 1.5.0'
   spec.add_development_dependency 'rake', '~> 10.0'
-  # spec.add_development_dependency 'thor', '~> 0.20.3'
   spec.add_dependency 'thor', '>= 0.19.0'
 end
 # rubocop:enable BlockLength
