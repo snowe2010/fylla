@@ -1,0 +1,32 @@
+function _<%= executable_name %><%= context_name %> {
+  <%- unless command.commands.empty? %>
+  function _commands {
+    local -a commands
+    commands=(
+      <%-# remove newlines and leading space on this loop %>
+      <%- command.commands.each do |command| %>
+      '<%= command.name %>:<%= command.description %>'
+      <%- end %>
+    )
+    _describe 'command' commands
+  }
+  <%- end %>
+  _arguments \
+    <%- unless command.options.nil? %>
+      <%- command.options.each do |option| %>
+        "-<%= option.name%>=[<%= option.banner %>]"
+        "-<%= option.aliases[0]%>=[<%= option.banner %>]"
+      <%- end %>
+    <%- end %>
+    "-h[Show help information]" \
+    "--help[Show help information]" \
+    "1: :_commands" \
+    "*::arg:->args"/.
+  case $line[1] in
+    <%- command.commands.each do |command| -%>
+      <%= command.name %>)
+        _<%= executable_name %><%= context_name %>_<%= command.name %>
+      ;;
+    <%- end -%>
+  esac
+}

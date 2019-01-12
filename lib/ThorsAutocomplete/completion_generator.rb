@@ -7,7 +7,6 @@ module ThorExtensions
 
       def ClassMethods
         def completion
-
         end
       end
     end
