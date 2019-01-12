@@ -1,4 +1,4 @@
-#compdef _executable executable
+#compdef _test test
 function _test_sub_noopts {
   _arguments \
     "-h[Show help information]" \

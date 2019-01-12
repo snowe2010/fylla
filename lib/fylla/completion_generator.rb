@@ -4,34 +4,18 @@ require 'erb'
 
 module Fylla
   module Thor
+    #
+    # module for prepending into +Thor+
+    # inserts methods into Thor that allow generating completion scripts
     module CompletionGenerator
       def self.prepended(base)
         base.singleton_class.prepend(ClassMethods)
       end
 
+      #
+      # Contains the methods +zsh_completion+
       module ClassMethods
-        def recursively_find_commands(command_map, subcommand_map)
-          map = Hash[command_map.map { |k, v| [v, subcommand_map[k]] }]
-          map.map do |command, subcommand_class|
-            if subcommand_class.nil?
-              ancestor_name = if command.respond_to? :ancestor_name
-                                command.ancestor_name
-                              end
-              ParsedCommand.new(ancestor_name, command.description, command.name, command.options.values)
-            else
-              commands = recursively_find_commands subcommand_class.commands, subcommand_class.subcommand_classes
-              ParsedSubcommand.new(command.name, command.description, commands, subcommand_class.class_options.values)
-            end
-          end
-        end
-
-        def create_command_map(command_map, subcommand_map)
-          command_map = recursively_find_commands command_map, subcommand_map
-          ParsedSubcommand.new(nil, '', command_map, [])
-        end
-
-        def zsh_completion
-          executable_name = 'test'
+        def zsh_completion(executable_name)
           command = create_command_map commands, subcommand_classes
 
           def recurse(commands, context = '', class_options = [], executable_name = '')
@@ -52,9 +36,31 @@ module Fylla
 
           # template = ERB.new(help_template, nil, '-<>')
           builder = recurse [command], executable_name
-          completion = "#compdef _executable executable\n"
+          completion = "#compdef _#{executable_name} #{executable_name}\n"
           completion += builder
           completion
+        end
+
+        private
+
+        def recursively_find_commands(command_map, subcommand_map)
+          map = Hash[command_map.map { |k, v| [v, subcommand_map[k]] }]
+          map.map do |command, subcommand_class|
+            if subcommand_class.nil?
+              ancestor_name = if command.respond_to? :ancestor_name
+                                command.ancestor_name
+                              end
+              ParsedCommand.new(ancestor_name, command.description, command.name, command.options.values)
+            else
+              commands = recursively_find_commands subcommand_class.commands, subcommand_class.subcommand_classes
+              ParsedSubcommand.new(command.name, command.description, commands, subcommand_class.class_options.values)
+            end
+          end
+        end
+
+        def create_command_map(command_map, subcommand_map)
+          command_map = recursively_find_commands command_map, subcommand_map
+          ParsedSubcommand.new(nil, '', command_map, [])
         end
 
         def create_completion_string(template, bind)

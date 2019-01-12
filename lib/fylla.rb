@@ -9,11 +9,12 @@ require 'thor'
 # Contains one method for initializing Fylla
 #
 module Fylla
-  def self.load
+  def self.load(executable_name = nil)
+    @executable_name = executable_name || nil
     ::Thor.prepend Fylla::Thor::CompletionGenerator
   end
 
-  def self.zsh_completion(binding)
-    binding.class.zsh_completion
+  def self.zsh_completion(binding, executable_name = @executable_name)
+    binding.class.zsh_completion(executable_name)
   end
 end
