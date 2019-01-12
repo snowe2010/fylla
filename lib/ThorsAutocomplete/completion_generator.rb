@@ -2,64 +2,6 @@ require_relative 'parsed_command'
 require_relative 'parsed_subcommand'
 require 'erb'
 
-def subcommand_template
-  %q{
-function _<%= executable_name %><%= context_name %> {
-  local line
-  <%- unless command.commands.empty? %>
-  function _commands {
-    local -a commands
-    commands=(
-      <%-# remove newlines and leading space on this loop -%>
-      <%- command.commands.each do |command| -%>
-      '<%= command.name %>:<%= command.description %>'
-      <%- end -%>
-    )
-    _describe 'command' commands
-  }
-  <%- end %>
-  _arguments \
-    <%- unless class_options.nil? -%>
-      <%- class_options.each do |option| -%>
-        <%- option.aliases.each do |al| -%>
-          "-<%= al %>=[<%= option.banner %>]"
-        <%- end -%>
-        "--<%= option.name%>=[<%= option.banner %>]"
-      <%- end -%>
-    <%- end -%>
-    "-h[Show help information]" \
-    "--help[Show help information]" \
-    "1: :_commands" \
-    "*::arg:->args"/.
-  case $line[1] in
-    <%- command.commands.each do |command| -%>
-      <%= command.name %>)
-        _<%= executable_name %><%= context_name %>_<%= command.name %>
-      ;;
-    <%- end -%>
-  esac
-}
-}
-end
-
-def command_template
-  %q{
-  function _<%= executable_name %><%= context_name %> {
-  _arguments \
-    <%- unless command.options.nil? -%>
-      <%- command.options.each do |option| -%>
-        "-<%= option.name%>=[<%= option.banner %>]"
-        "-<%= option.aliases[0]%>=[<%= option.banner %>]"
-      <%- end -%>
-    <%- end -%>
-    "-h[Show help information]" \
-    "--help[Show help information]" \
-    "1: :_commands" \
-    "*::arg:->args"/.
-}
-}
-end
-
 module ThorExtensions
   module Thor
     module CompletionGenerator
@@ -96,9 +38,9 @@ module ThorExtensions
               result = if command.is_a? ParsedSubcommand
                          class_options = (class_options + command.class_options).uniq
                          builder += recurse(command.commands, context_name, class_options, executable_name)
-                         create_completion_string(subcommand_template, binding)
+                         create_completion_string(get_subcommand_template_file, binding)
                        else
-                         create_completion_string(command_template, binding)
+                         create_completion_string(get_command_template_file, binding)
                        end
               builder += result
             end
@@ -107,7 +49,7 @@ module ThorExtensions
 
           # template = ERB.new(help_template, nil, '-<>')
           builder = recurse [command], executable_name
-          completion = "#compdef _executable executable"
+          completion = "#compdef _executable executable\n"
           completion += builder
           completion
         end
@@ -115,6 +57,14 @@ module ThorExtensions
         def create_completion_string(template, bind)
           template = ERB.new(template, nil, '-<>')
           template.result(bind)
+        end
+
+        def get_command_template_file
+          File.read(File.join(__dir__, "command.erb"))
+        end
+
+        def get_subcommand_template_file
+          File.read(File.join(__dir__, "subcommand.erb"))
         end
       end
     end

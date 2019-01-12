@@ -13,14 +13,14 @@ function _<%= executable_name %><%= context_name %> {
     }
   <%- end %>
   _arguments \
-  <%- unless class_options.nil? %>
-    <%- class_options.each do |option| %>
+  <%- unless class_options.nil? -%>
+    <%- class_options.each do |option| -%>
       <%- option.aliases.each do |al| -%>
         "-<%= al %>=[<%= option.banner %>]"
-      <%- end %>
-    "--<%= option.name %>=[<%= option.banner %>]"
-    <%- end %>
-  <%- end %>
+      <%- end -%>
+      "--<%= option.name%>=[<%= option.banner %>]"
+    <%- end -%>
+  <%- end -%>
   "-h[Show help information]" \
   "--help[Show help information]" \
   "1: :_commands" \
