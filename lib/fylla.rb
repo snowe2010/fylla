@@ -1,7 +1,6 @@
-require "fylla/version"
+require 'fylla/version'
 
 module Fylla
-  class Error < StandardError;
+  class Error < StandardError
   end
-  # Your code goes here...
 end
