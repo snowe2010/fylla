@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/snowe2010/fylla.svg?branch=master)](https://travis-ci.com/snowe2010/fylla)
+
 # Fylla
 
 Fylla, the Norse word for `complete`, is an autocompletion script generator for the [Thor](whatisthor.com) framework.
