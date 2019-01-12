@@ -2,6 +2,7 @@ lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'fylla/version'
 
+# rubocop:disable BlockLength
 Gem::Specification.new do |spec|
   spec.name = 'fylla'
   spec.version = Fylla::VERSION
@@ -15,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://github.com/snowe2010/fylla'
   spec.license = 'MIT'
 
-  spec.metadata["yard.run"] = "yri" # use "yard" to build full HTML docs.
+  spec.metadata['yard.run'] = 'yri' # use "yard" to build full HTML docs.
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -39,7 +40,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.bindir = 'exe'
-  spec.executables = spec.files.grep(%r{^exe/}) {|f| File.basename(f)}
+  spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 2.0'
@@ -49,3 +50,4 @@ Gem::Specification.new do |spec|
   # spec.add_development_dependency 'thor', '~> 0.20.3'
   spec.add_dependency 'thor', '>= 0.19.0'
 end
+# rubocop:enable BlockLength

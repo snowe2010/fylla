@@ -15,7 +15,6 @@ module Fylla
       #
       # Contains the methods +zsh_completion+
       module ClassMethods
-
         #
         # Generates a zsh _[executable_name] completion
         # script for the entire Thor application
@@ -105,7 +104,7 @@ module Fylla
         # @param subcommand_map [Hash<String, Class < Thor>]
         #   a map indicating the subcommands and their respective classes
         def recursively_find_commands(command_map, subcommand_map)
-          map = Hash[command_map.map {|k, v| [v, subcommand_map[k]]}]
+          map = Hash[command_map.map { |k, v| [v, subcommand_map[k]] }]
           map.map do |command, subcommand_class|
             if subcommand_class.nil?
               ancestor_name = command.ancestor_name if command.respond_to? :ancestor_name

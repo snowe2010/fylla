@@ -14,5 +14,4 @@ class CompletionTest < Minitest::Test
       CLI.start(ARGV)
     end
   end
-
 end
