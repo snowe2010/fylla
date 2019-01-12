@@ -22,7 +22,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+`Fylla` must be loaded before `Thor.start` is called in order for it to be used. 
+
+General use case will be to create a new subcommand or option that calls `Fylla.zsh_completion(self)`
+
+`Fylla#zsh_completion` returns a string containing the entire zsh completion script, that you can 
+use to do what you see fit.
+
+Same for bash completion.
+
+The only requirement for calling `Fylla.zsh_completion(self)` is that `Thor` has loaded all commands/options/etc.
 
 ## Development
 
