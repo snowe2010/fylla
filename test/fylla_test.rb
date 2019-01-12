@@ -21,8 +21,8 @@ class FyllaTest < Minitest::Test
     ARGV << 'sub'
     assert_output(/
       Commands:\n
-      .* subcommand\shelp\s\[COMMAND\].*?\n
-      .* subcommand\snoopts\s.*?
+      .* \D+?\shelp\s\[COMMAND\].*?\n
+      .* \D+?\snoopts\s.*?
     /x) do
       CLI.start(ARGV)
     end
