@@ -6,7 +6,9 @@ class CompletionTest < Minitest::Test
     ARGV.clear
     ARGV << 'generate_completions'
     expected = File.read(File.join(__dir__, 'zsh_test_output.zsh'))
-    assert_output(expected) {CLI.start(ARGV)}
+    assert_output(expected) do
+      CLI.start(ARGV)
+    end
   end
 
 end

@@ -17,8 +17,8 @@ class CLI < Thor
   desc "generate_completions", "generate completions"
 
   def generate_completions
-    puts self.class.zsh_completion
+    puts Fylla.zsh_completion(self)
   end
 end
 
-Thor.prepend Fylla::Thor::CompletionGenerator
+Fylla.load
