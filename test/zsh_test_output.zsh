@@ -72,3 +72,20 @@ function _test {
     ;;
   esac
 }
+function _test_help {
+
+    function _commands {
+    local -a commands
+    commands=(
+      'sub:a subcommand'
+      'generate_completions:generate completions'
+    )
+    _describe 'command' commands
+    }
+
+  _arguments \
+    "-h[Show help information]" \
+    "--help[Show help information]" \
+    "1: :_commands" \
+    "*::arg:->args"/.
+}
