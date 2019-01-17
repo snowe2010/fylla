@@ -52,3 +52,10 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## Code of Conduct
 
 Everyone interacting in the Fylla project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/fylla/blob/master/CODE_OF_CONDUCT.md).
+
+## Todo list
+
+* use desc if banner isn't present
+* add completion parameter to Option class to use by default
+* add bash completion
+* allow zsh_completion and bash_completion to be called from _anywhere_. This might be impossible. 
