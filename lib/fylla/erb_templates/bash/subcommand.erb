@@ -1,0 +1,36 @@
+_<%= @executable_name %><%= context_name %>() {
+  local i=1 subcommand_index
+
+  # find the subcommand
+  while [[ $i -lt $COMP_CWORD ]]; do
+    local s="${COMP_WORDS[i]}"
+    case "$s" in
+    <%= command.name || @executable_name %>) <%# if command.name is empty, then we're at the top level command. therefore we need to use the @executable_name %>
+      subcommand_index=$i
+      break
+      ;;
+    esac
+    (( i++ ))
+  done
+
+  while [[ $subcommand_index -lt $COMP_CWORD ]]; do
+    local s="${COMP_WORDS[subcommand_index]}"
+    case "$s" in
+      <%- unless command.commands.empty? -%>
+        <%- command.commands.each do |command| -%>
+          <%= command.name %>)
+            _<%= @executable_name %><%= context_name %>_<%= command.name %>
+            return ;;
+        <%- end -%>
+      <%- end -%>
+      help)
+        COMPREPLY=""
+        return
+        ;;
+    esac
+    (( subcommand_index++ ))
+  done
+
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  COMPREPLY=($(compgen -W "<%= command.commands.map(&:name).join(" ") %> <%= command.class_options.map(&:switch_name).join(" ") %>" -- "$cur"))
+}

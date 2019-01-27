@@ -21,9 +21,17 @@ module Fylla
   # @param binding [Binding] _must always be self_
   # @param executable_name [String] name of your thor executable,
   #   must either be provided through #self.load or here.
-  # @return [String] containing the entire zsh completion
-  # script.
+  # @return [String] containing the entire zsh completion script.
   def self.zsh_completion(binding, executable_name = @executable_name)
     binding.class.zsh_completion(executable_name)
+  end
+
+  #
+  # @param binding [Binding] _must always be self_
+  # @param executable_name [String] name of your thor executable,
+  #   must either be provided through #self.load or here.
+  # @return [String] containing the entire bash completion script.
+  def self.bash_completion(binding, executable_name = @executable_name)
+    binding.class.bash_completion(executable_name)
   end
 end

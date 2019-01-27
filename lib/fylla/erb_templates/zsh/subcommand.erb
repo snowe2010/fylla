@@ -1,4 +1,4 @@
-function _<%= executable_name %><%= context_name %> {
+function _<%= @executable_name %><%= context_name %> {
   local line
   <%- unless command.commands.empty? %>
     function _commands {
@@ -28,7 +28,7 @@ function _<%= executable_name %><%= context_name %> {
   case $line[1] in
   <%- command.commands.each do |command| -%>
     <%= command.name %>)
-    _<%= executable_name %><%= context_name %>_<%= command.name %>
+    _<%= @executable_name %><%= context_name %>_<%= command.name %>
     ;;
   <%- end -%>
   esac

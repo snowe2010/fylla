@@ -22,13 +22,33 @@ module Fylla
         # @param executable_name [String]
         #   the name of the executable to generate the script for
         def zsh_completion(executable_name)
+          @executable_name = executable_name
           command = create_command_map commands, subcommand_classes
 
           help = create_completion_string(read_template(:zsh, :help), binding)
-          builder = map_to_completion_string [command], executable_name
+          builder = map_to_completion_string [command]
           completion = "#compdef _#{executable_name} #{executable_name}\n"
           completion += builder
           completion += help
+          completion
+        end
+
+        #
+        # Generates a bash _[executable_name] completion
+        # script for the entire Thor application
+        #
+        # @param executable_name [String]
+        #   the name of the executable to generate the script for
+        def bash_completion(executable_name)
+          @executable_name = executable_name
+          command = create_command_map commands, subcommand_classes
+
+          help = create_completion_string(read_template(:bash, :help), binding)
+          builder = map_to_completion_string [command], style: :bash
+          completion = ''
+          completion += builder
+          completion += help
+          completion += "complete -F _#{executable_name} #{executable_name}\n"
           completion
         end
 
@@ -49,17 +69,14 @@ module Fylla
         #          "_sub1_sub2_sub3"
         # @param class_options [List<Thor::Option>]
         #   a list of global or class level options for the current context
-        # @param executable_name [String] the executable name, for use in
-        #   method calls and to name the completion script.
         def map_to_completion_string(commands,
-                                     context = '',
-                                     class_options = [],
-                                     executable_name = '',
-                                     style = :zsh)
+                                     context: '',
+                                     class_options: [],
+                                     style: :zsh)
           builder = ''
           commands.each do |command|
             context_name = generate_context_name(context, command)
-            result = generate_completion_string(command, class_options, context_name, executable_name, style)
+            result = generate_completion_string(command, class_options, context_name, style)
             builder += result
           end
           builder
@@ -80,11 +97,15 @@ module Fylla
           "#{context}#{command_name}"
         end
 
-        def generate_completion_string(command, class_options, context_name, executable_name, style)
+        def generate_completion_string(command, class_options, context_name, style)
           builder = ''
           if command.is_a? ParsedSubcommand
             class_options = (class_options + command.class_options).uniq
-            builder += map_to_completion_string(command.commands, context_name, class_options, executable_name)
+            builder += map_to_completion_string(command.commands,
+                                                context: context_name,
+                                                class_options: class_options,
+                                                style: style)
+
             builder += create_completion_string(read_template(style, :subcommand), binding)
           else
             builder += create_completion_string(read_template(style, :command), binding)
@@ -125,7 +146,7 @@ module Fylla
         # (see #recursively_find_commands) for more documentation
         def create_command_map(command_map, subcommand_map)
           command_map = recursively_find_commands command_map, subcommand_map
-          ParsedSubcommand.new(nil, '', command_map, [])
+          ParsedSubcommand.new(nil, '', command_map, class_options.values)
         end
 
         # Helper method to load an [ERB] template
