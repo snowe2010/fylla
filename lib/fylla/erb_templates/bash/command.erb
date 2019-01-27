@@ -1,0 +1,5 @@
+_<%= @executable_name %><%= context_name %> ()
+{
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  COMPREPLY=($(compgen -W "<%= command.options.map(&:switch_name).join(" ") %> --help -h" -- "$cur"))
+}
