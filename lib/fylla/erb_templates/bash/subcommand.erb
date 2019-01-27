@@ -5,7 +5,7 @@ _<%= @executable_name %><%= context_name %>() {
   while [[ $i -lt $COMP_CWORD ]]; do
     local s="${COMP_WORDS[i]}"
     case "$s" in
-    <%= command.name || @executable_name %>) <%# if command.name is empty, then we're at the top level command. therefore we need to use the @executable_name %>
+    <%= command.name || @executable_name %>)<%# if command.name is empty, then we're at the top level command. therefore we need to use the @executable_name %>
       subcommand_index=$i
       break
       ;;
