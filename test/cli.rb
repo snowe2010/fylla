@@ -1,24 +1,26 @@
 require 'thor'
 
-class Subcommand < Thor
-  include Thor::Base
-  desc 'noopts', 'subcommand that takes no options'
+module Zsh
+  module CLI
+    class Subcommand < Thor
+      include Thor::Base
+      desc 'noopts', 'subcommand that takes no options'
 
-  def noopts
-    puts 'noopts'
-  end
-end
+      def noopts
+        puts 'noopts'
+      end
+    end
 
-module CLI
-  class ZshCLI < Thor
-    include Thor::Base
-    desc 'sub', 'a subcommand'
-    subcommand 'sub', Subcommand
+    class Main < Thor
+      include Thor::Base
+      desc 'sub', 'a subcommand'
+      subcommand 'sub', Subcommand
 
-    desc 'generate_completions', 'generate completions'
+      desc 'generate_completions', 'generate completions'
 
-    def generate_completions
-      puts Fylla.zsh_completion(self)
+      def generate_completions
+        puts Fylla.zsh_completion(self)
+      end
     end
   end
 end

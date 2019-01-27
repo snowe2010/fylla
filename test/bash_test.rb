@@ -247,7 +247,7 @@ class BashTest < Minitest::Test
     ARGV << 'generate'
     expected = SINGLE_SUBCOMMAND
     assert_output(expected) do
-      CLI::Subcommand.start(ARGV)
+      Bash::CLI::Subcommand.start(ARGV)
     end
   end
 
@@ -256,7 +256,7 @@ class BashTest < Minitest::Test
     ARGV << 'generate'
     expected = SUBCOMMAND_WITH_OPTIONS
     assert_output(expected) do
-      CLI::SubcommandWithOptions.start(ARGV)
+      Bash::CLI::SubcommandWithOptions.start(ARGV)
     end
   end
 
@@ -265,7 +265,7 @@ class BashTest < Minitest::Test
     ARGV << 'generate'
     expected = NESTED_SUBCOMMAND_WITH_OPTIONS
     assert_output(expected) do
-      CLI::SubcommandWithNestedSubcommandsAndOptions.start(ARGV)
+      Bash::CLI::SubcommandWithNestedSubcommandsAndOptions.start(ARGV)
     end
   end
 end

@@ -11,7 +11,7 @@ class HelpTest< Minitest::Test
     ARGV << 'help'
     # expected = SUBCOMMAND
     # assert_output(expected) do
-      CLI::SubcommandWithNestedSubcommandsAndOptions.start(ARGV)
+      Bash::CLI::SubcommandWithNestedSubcommandsAndOptions.start(ARGV)
     # end
   end
 
@@ -20,7 +20,7 @@ class HelpTest< Minitest::Test
     ARGV << 'plain' << '-h'
     # expected = SUBCOMMAND
     # assert_output(expected) do
-      CLI::SubcommandWithNestedSubcommandsAndOptions.start(ARGV)
+      Bash::CLI::SubcommandWithNestedSubcommandsAndOptions.start(ARGV)
     # end
   end
 end
