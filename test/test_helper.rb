@@ -1,4 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
+$LOAD_PATH.unshift File.expand_path('../test', __dir__)
 
 require 'fylla'
 require 'fylla/completion_generator'

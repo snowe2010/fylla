@@ -13,7 +13,7 @@ class FyllaTest < Minitest::Test
 
   def test_cli_start_no_args
     assert_output(/Commands/) do
-      CLI.start(ARGV)
+      CLI::ZshCLI.start(ARGV)
     end
   end
 
@@ -24,7 +24,7 @@ class FyllaTest < Minitest::Test
       .* \D+?\shelp\s\[COMMAND\].*?\n
       .* \D+?\snoopts\s.*?
     /x) do
-      CLI.start(ARGV)
+      CLI::ZshCLI.start(ARGV)
     end
   end
 
@@ -32,7 +32,7 @@ class FyllaTest < Minitest::Test
     ARGV << 'sub'
     ARGV << 'noopts'
     assert_output("noopts\n") do
-      CLI.start(ARGV)
+      CLI::ZshCLI.start(ARGV)
     end
   end
 end

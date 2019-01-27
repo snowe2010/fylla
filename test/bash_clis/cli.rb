@@ -19,7 +19,7 @@ module CLI
     def plain
       puts 'plain complete'
     end
-    end
+  end
 
   class SubcommandWithNestedSubcommandsAndOptions < ThorHelper
     class_option :class_opt,
