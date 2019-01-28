@@ -1,5 +1,5 @@
 require_relative 'test_helper'
-require_relative 'bash_clis/cli'
+require_relative 'bash/bash_clis/cli'
 
 class HelpTest< Minitest::Test
   def setup

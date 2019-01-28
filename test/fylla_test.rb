@@ -1,5 +1,5 @@
 require_relative 'test_helper'
-require_relative 'cli'
+require_relative 'zsh/test_commands/plain_subcommand'
 
 class FyllaTest < Minitest::Test
   def setup
@@ -13,7 +13,7 @@ class FyllaTest < Minitest::Test
 
   def test_cli_start_no_args
     assert_output(/Commands/) do
-      Zsh::CLI::Main.start(ARGV)
+      Zsh::PlainSubcommands::Main.start(ARGV)
     end
   end
 
@@ -24,7 +24,7 @@ class FyllaTest < Minitest::Test
       .* \D+?\shelp\s\[COMMAND\].*?\n
       .* \D+?\snoopts\s.*?
     /x) do
-      Zsh::CLI::Main.start(ARGV)
+      Zsh::PlainSubcommands::Main.start(ARGV)
     end
   end
 
@@ -32,7 +32,7 @@ class FyllaTest < Minitest::Test
     ARGV << 'sub'
     ARGV << 'noopts'
     assert_output("noopts\n") do
-      Zsh::CLI::Main.start(ARGV)
+      Zsh::PlainSubcommands::Main.start(ARGV)
     end
   end
 end

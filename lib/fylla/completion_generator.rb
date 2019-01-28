@@ -23,13 +23,11 @@ module Fylla
         #   the name of the executable to generate the script for
         def zsh_completion(executable_name)
           @executable_name = executable_name
-          command = create_command_map commands, subcommand_classes
+          command = create_command_map all_commands, subcommand_classes
 
-          help = create_completion_string(read_template(:zsh, :help), binding)
           builder = map_to_completion_string [command]
           completion = "#compdef _#{executable_name} #{executable_name}\n"
           completion += builder
-          completion += help
           completion
         end
 
@@ -41,13 +39,11 @@ module Fylla
         #   the name of the executable to generate the script for
         def bash_completion(executable_name)
           @executable_name = executable_name
-          command = create_command_map commands, subcommand_classes
+          command = create_command_map all_commands, subcommand_classes
 
-          help = create_completion_string(read_template(:bash, :help), binding)
           builder = map_to_completion_string [command], style: :bash
           completion = ''
           completion += builder
-          completion += help
           completion += "complete -F _#{executable_name} #{executable_name}\n"
           completion
         end
@@ -163,7 +159,7 @@ module Fylla
         # from a file and return it as a [String]
         #
         # @param name [Symbol] type of template to retrieve
-        #   can be either :help, :subcommand, or :command
+        #   can be either :subcommand or :command
         # @param style [Symbol] style of template to retrieve
         #   can be either :zsh or :bash
         # @return [String] template string retrieved from erb file
