@@ -59,6 +59,5 @@ Everyone interacting in the Fylla project’s codebases, issue trackers, chat ro
 
 * use desc if banner isn't present
 * add completion parameter to Option class to use by default
-* add bash completion
 * allow zsh_completion and bash_completion to be called from _anywhere_. This might be impossible. 
 * allow supplying custom templates
