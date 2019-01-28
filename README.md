@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.com/snowe2010/fylla.svg?branch=master)](https://travis-ci.com/snowe2010/fylla)
+[![codecov](https://codecov.io/gh/snowe2010/fylla/branch/master/graph/badge.svg)](https://codecov.io/gh/snowe2010/fylla)
+[![Ruby gem](https://img.shields.io/gem/v/fylla.svg)](https://rubygems.org/gems/fylla)
 
 # Fylla
 
