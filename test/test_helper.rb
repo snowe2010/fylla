@@ -3,6 +3,7 @@ $LOAD_PATH.unshift File.expand_path('../test', __dir__)
 
 require 'fylla'
 require 'fylla/completion_generator'
+require 'fylla/completion_extension'
 require 'minitest/autorun'
 require 'minitest/hooks/default'
 

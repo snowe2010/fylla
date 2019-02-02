@@ -1,7 +1,7 @@
 require_relative 'test_helper'
 require_relative 'bash/bash_clis/cli'
 
-class HelpTest< Minitest::Test
+class HelpTest < Minitest::Test
   def setup
     Fylla.load('test')
   end
@@ -15,7 +15,7 @@ class HelpTest< Minitest::Test
     # end
   end
 
-  def test_bash_single_subcommand
+  def test_bash_single_subcommanda
     ARGV.clear
     ARGV << 'plain' << '-h'
     # expected = SUBCOMMAND

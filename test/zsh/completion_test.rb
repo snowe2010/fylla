@@ -31,6 +31,14 @@ class CompletionTest < Minitest::Test
           "1: :_commands" \
           "*::arg:->args"/.
       }
+      function _test_sub_withopts {
+        _arguments \
+          "-an_option=[AN_OPTION]" \
+          "-h[Show help information]" \
+          "--help[Show help information]" \
+          "1: :_commands" \
+          "*::arg:->args"/.
+      }
       function _test_sub_help {
         _arguments \
           "-h[Show help information]" \
@@ -46,6 +54,7 @@ class CompletionTest < Minitest::Test
           commands=(
             'help:Describe subcommands or one specific subcommand'
             'noopts:subcommand that takes no options'
+            'withopts:subcommand that takes options'
           )
           _describe 'command' commands
           }
@@ -61,6 +70,9 @@ class CompletionTest < Minitest::Test
           ;;
           noopts)
           _test_sub_noopts
+          ;;
+          withopts)
+          _test_sub_withopts
           ;;
         esac
       }

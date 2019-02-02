@@ -2,6 +2,7 @@ require 'fylla/version'
 require 'fylla/completion_generator'
 require 'fylla/parsed_command'
 require 'fylla/parsed_subcommand'
+require 'fylla/completion_extension'
 require 'thor'
 
 #
@@ -12,12 +13,16 @@ module Fylla
   #
   # this method initializes [Fylla]
   # Call this _before_ #Thor.start is called.
+  # @param executable_name [String] name of your thor executable, must be provided
+  # here or through #self.zsh_completion or #self.bash_completion
   def self.load(executable_name = nil)
     @executable_name = executable_name || nil
     ::Thor.prepend Fylla::Thor::CompletionGenerator
+    # ::Thor::Option.prepend Fylla::Thor::Option
   end
 
   #
+  # Method to generate bash completions for the current [Thor] application
   # @param binding [Binding] _must always be self_
   # @param executable_name [String] name of your thor executable,
   #   must either be provided through #self.load or here.
@@ -27,6 +32,7 @@ module Fylla
   end
 
   #
+  # Method to generate bash completions for the current [Thor] application
   # @param binding [Binding] _must always be self_
   # @param executable_name [String] name of your thor executable,
   #   must either be provided through #self.load or here.

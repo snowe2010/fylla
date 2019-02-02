@@ -1,3 +1,4 @@
+require_relative 'parsed_option'
 require_relative 'parsed_command'
 require_relative 'parsed_subcommand'
 require 'erb'
@@ -121,11 +122,12 @@ module Fylla
         # @param subcommand_map [Hash<String, Class < Thor>]
         #   a map indicating the subcommands and their respective classes
         def recursively_find_commands(command_map, subcommand_map)
-          map = Hash[command_map.map { |k, v| [v, subcommand_map[k]] }]
+          map = Hash[command_map.map {|k, v| [v, subcommand_map[k]]}]
           map.map do |command, subcommand_class|
             if subcommand_class.nil?
               ancestor_name = command.ancestor_name if command.respond_to? :ancestor_name
-              ParsedCommand.new(ancestor_name, command.description, command.name, command.options.values)
+              options = parse_options(command.options.values)
+              ParsedCommand.new(ancestor_name, command.description, command.name, options)
             else
               commands = recursively_find_commands subcommand_class.commands, subcommand_class.subcommand_classes
               ParsedSubcommand.new(command.name, command.description, commands, subcommand_class.class_options.values)
@@ -168,6 +170,13 @@ module Fylla
           name = name.is_a?(Symbol) ? name.to_s : name
           erb_path = "erb_templates/#{style}/#{name}.erb"
           File.read(File.join(__dir__, erb_path))
+        end
+
+        def parse_options(options)
+          options.map do |opt|
+            description = opt.completion_text || opt.description || opt.banner
+            ParsedOption.new(opt.name, description, opt.aliases)
+          end
         end
       end
     end

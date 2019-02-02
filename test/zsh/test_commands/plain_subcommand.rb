@@ -7,6 +7,12 @@ module Zsh
       def noopts
         puts 'noopts'
       end
+
+      desc 'withopts', 'subcommand that takes options'
+      option :an_option
+      def withopts
+        puts 'with options'
+      end
     end
 
     class Main < ThorTest
