@@ -12,6 +12,15 @@ module Zsh
         puts 'with options'
       end
     end
+    class Subcommand1Boolean < ThorTest
+      desc 'withopts', 'subcommand that takes options'
+      option :an_option,
+             type: :boolean
+
+      def withopts
+        puts 'with options'
+      end
+    end
     class Subcommand2 < ThorTest
       desc 'withopts', 'subcommand that takes options'
       option :an_option, completion: "a completion"
@@ -62,6 +71,25 @@ class CompletionOptionTest < Minitest::Test
     ARGV << 'generate_completions'
     assert_output(matches(expected)) do
       Zsh::CompletionOptionTest::Subcommand1.start(ARGV)
+    end
+  end
+
+  def test_options_no_description_boolean
+    expected = <<~'HERE'
+      function _options_withopts {
+        _arguments \
+          "--an_option=[]" \
+          "-h[Show help information]" \
+          "--help[Show help information]" \
+          "1: :_commands" \
+          "*::arg:->args"/.
+      }
+    HERE
+
+    ARGV.clear
+    ARGV << 'generate_completions'
+    assert_output(matches(expected)) do
+      Zsh::CompletionOptionTest::Subcommand1Boolean.start(ARGV)
     end
   end
 
