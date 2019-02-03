@@ -11,17 +11,26 @@ class BashTest < Minitest::Test
       _test_help ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W " --help -h" -- "$cur"))
+        local options=()
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test_generate ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W " --help -h" -- "$cur"))
+        local options=()
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test_plain ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W " --help -h" -- "$cur"))
+        local options=()
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test() {
         local i=1 subcommand_index
@@ -76,17 +85,27 @@ class BashTest < Minitest::Test
       _test_help ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W " --help -h" -- "$cur"))
+        local options=()
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test_generate ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W " --help -h" -- "$cur"))
+        local options=()
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test_plain ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W "--opt1 --help -h" -- "$cur"))
+        local options=()
+          options+=("--opt1")
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test() {
         local i=1 subcommand_index
@@ -141,27 +160,43 @@ class BashTest < Minitest::Test
       _test_help ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W " --help -h" -- "$cur"))
+        local options=()
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test_generate ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W " --help -h" -- "$cur"))
+        local options=()
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test_plain ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W "--opt1 --help -h" -- "$cur"))
+        local options=()
+          options+=("--opt1")
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test_subcommand_plain ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W " --help -h" -- "$cur"))
+        local options=()
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test_subcommand_help ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W " --help -h" -- "$cur"))
+        local options=()
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test_subcommand() {
         local i=1 subcommand_index
@@ -201,12 +236,19 @@ class BashTest < Minitest::Test
       _test_subcommand2_plain ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W "--opt1 --help -h" -- "$cur"))
+        local options=()
+          options+=("--opt1")
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test_subcommand2_help ()
       {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W " --help -h" -- "$cur"))
+        local options=()
+        options+=("--help")
+        options+=("-h")
+        COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
       }
       _test_subcommand2() {
         local i=1 subcommand_index

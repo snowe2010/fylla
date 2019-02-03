@@ -1,5 +1,14 @@
 _<%= @executable_name %><%= context_name %> ()
 {
   local cur="${COMP_WORDS[COMP_CWORD]}"
-  COMPREPLY=($(compgen -W "<%= command.options.map(&:switch_name).join(" ") %> --help -h" -- "$cur"))
+  local options=()
+  <%- command.options.each do |opt| -%>
+    options+=("--<%= opt.name %>")
+    <%- opt.aliases.each do |a| -%>
+    options+=("-<%= a %>")
+    <%- end -%>
+  <%- end -%>
+  options+=("--help")
+  options+=("-h")
+  COMPREPLY=($(compgen -W "${options[*]}" -- "$cur"))
 }

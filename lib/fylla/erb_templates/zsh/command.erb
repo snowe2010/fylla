@@ -2,9 +2,9 @@ function _<%= @executable_name %><%= context_name %> {
   _arguments \
   <%- unless command.options.nil? -%>
     <%- command.options.each do |option| -%>
-    "-<%= option.name%>=[<%= option.description %>]" \
+    "--<%= option.name%>=[<%= option.description %>]" \
     <%- option.aliases.each do |al| -%>
-      "-<%= al %>=[<%= option.description %>]" \
+    "-<%= al %>=[<%= option.description %>]" \
     <%- end -%>
     <%- end -%>
   <%- end -%>
