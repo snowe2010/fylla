@@ -7,4 +7,9 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/**/*_test.rb']
 end
 
-task default: :test
+desc 'Build documentation for all versions'
+task :yard do
+  `yard`
+end
+
+task default: %i[test yard]
