@@ -6,46 +6,43 @@
 
 Fylla, the Norse word for `complete`, is an autocompletion script generator for the [Thor](whatisthor.com) framework.
 
-It currently generates zsh completion scripts, but will soon have support for bash scripts as well. 
+Fylla currently generates zsh completion scripts. Support for bash scripts will be added.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add the following line to your application's Gemfile:
 
 ```ruby
 gem 'fylla'
 ```
 
-And then execute:
+execute using the following command:
 
     $ bundle
 
-Or install it yourself as:
+Or install fylla manually:
 
     $ gem install fylla
 
 ## Usage
 
-`Fylla` must be loaded before `Thor.start` is called in order for it to be used. 
+`Fylla` must be loaded before `Thor.start` can be used. 
 
 General use case will be to create a new subcommand or option that calls `Fylla.zsh_completion(self)`
 
-`Fylla#zsh_completion` returns a string containing the entire zsh completion script, that you can 
-use to do what you see fit.
+`Fylla#zsh_completion` returns a string containing the entire zsh completion script and bash completion script. Scripts are ready for use after `Fylla#zsh_completion` returns.
 
-Same for bash completion.
-
-The only requirement for calling `Fylla.zsh_completion(self)` is that `Thor` has loaded all commands/options/etc.
+`Thor` is required to load commands/options/etc before calling `Fylla.zsh_completion(self)`.
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. Run `bin/console` for an interactive prompt that allows experimentation.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install the gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/snowe2010/fylla. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcomed on GitHub at https://github.com/snowe2010/fylla. Fylla is intended to be a safe, welcoming space for collaboration. Contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -53,11 +50,11 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Fylla project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/fylla/blob/master/CODE_OF_CONDUCT.md).
+People interacting in the Fylla project’s codebases, issue trackers, chat rooms and mailing lists are expected to follow the [code of conduct](https://github.com/[USERNAME]/fylla/blob/master/CODE_OF_CONDUCT.md).
 
 ## Todo list
 
-* use desc if banner isn't present
-* add completion parameter to Option class to use by default
-* allow zsh_completion and bash_completion to be called from _anywhere_. This might be impossible. 
-* allow supplying custom templates
+* Use description if banner isn't present,
+* add completion parameter to Option class to use by default,
+* allow zsh_completion and bash_completion to be called from _anywhere_, and 
+* allow supplying custom templates.
