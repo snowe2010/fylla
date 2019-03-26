@@ -6,8 +6,6 @@
 
 Fylla, the Norse word for `complete`, is an autocompletion script generator for the [Thor](whatisthor.com) framework.
 
-Fylla currently generates zsh completion scripts. Support for bash scripts will be added.
-
 ## Installation
 
 Add the following line to your application's Gemfile:
@@ -16,7 +14,7 @@ Add the following line to your application's Gemfile:
 gem 'fylla'
 ```
 
-execute using the following command:
+And execute using the following command:
 
     $ bundle
 
@@ -26,17 +24,19 @@ Or install fylla manually:
 
 ## Usage
 
-`Fylla` must be loaded before `Thor.start` can be used. 
+Fylla must be loaded before `Thor.start` (the method) is called, in order for Fylla to be callable, else no completions will be generated.
 
 General use case will be to create a new subcommand or option that calls `Fylla.zsh_completion(self)`
 
 `Fylla#zsh_completion` returns a string containing the entire zsh completion script and bash completion script. Scripts are ready for use after `Fylla#zsh_completion` returns.
 
-`Thor` is required to load commands/options/etc before calling `Fylla.zsh_completion(self)`.
+The only requirement for calling `Fylla.zsh_completion(self)` is for `Thor` to load all commands/options/etc..
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. Run `bin/console` for an interactive prompt that allows experimentation.
+Same procedure works for bash completion.
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install the gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
@@ -54,7 +54,7 @@ People interacting in the Fylla project’s codebases, issue trackers, chat room
 
 ## Todo list
 
-* Use description if banner isn't present,
-* add completion parameter to Option class to use by default,
-* allow zsh_completion and bash_completion to be called from _anywhere_, and 
-* allow supplying custom templates.
+* Use description if banner isn't present
+* add completion parameter to Option class to use by default
+* allow zsh_completion and bash_completion to be called from _anywhere_ 
+* allow supplying custom templates
