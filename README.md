@@ -28,7 +28,7 @@ Fylla must be loaded before `Thor.start` (the method) is called, in order for Fy
 
 General use case will be to create a new subcommand or option that calls `Fylla.zsh_completion(self)`
 
-`Fylla#zsh_completion` returns a string containing the entire zsh completion script and bash completion script. Scripts are ready for use after `Fylla#zsh_completion` returns.
+`Fylla#zsh_completion` returns a string containing the entire zsh completion script, that you can use to do what you see fit.
 
 Same for bash completion.
 
