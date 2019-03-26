@@ -30,11 +30,11 @@ General use case will be to create a new subcommand or option that calls `Fylla.
 
 `Fylla#zsh_completion` returns a string containing the entire zsh completion script and bash completion script. Scripts are ready for use after `Fylla#zsh_completion` returns.
 
+Same for bash completion.
+
 The only requirement for calling `Fylla.zsh_completion(self)` is for `Thor` to load all commands/options/etc..
 
 ## Development
-
-Same procedure works for bash completion.
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
