@@ -54,7 +54,7 @@ People interacting in the Fylla project’s codebases, issue trackers, chat room
 
 ## Todo list
 
-* Use description if banner isn't present
+* Use desc if banner isn't present
 * add completion parameter to Option class to use by default
-* allow zsh_completion and bash_completion to be called from _anywhere_ 
+* allow zsh_completion and bash_completion to be called from anywhere. This might be impossible.
 * allow supplying custom templates
