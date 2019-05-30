@@ -5,6 +5,9 @@ require 'fylla/parsed_subcommand'
 require 'fylla/completion_extension'
 require 'thor'
 
+# We _must prepend before thor loads_ Ideally this is at require time...
+::Thor::Option.prepend Fylla::Thor::Option
+
 #
 # Top level module for the Fylla project.
 # Contains one method for initializing Fylla
@@ -18,7 +21,6 @@ module Fylla
   def self.load(executable_name = nil)
     @executable_name = executable_name || nil
     ::Thor.prepend Fylla::Thor::CompletionGenerator
-    # ::Thor::Option.prepend Fylla::Thor::Option
   end
 
   #

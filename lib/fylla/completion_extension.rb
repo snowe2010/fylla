@@ -1,20 +1,14 @@
 require 'thor'
 
-class Thor
-  class Option
-    attr_accessor :completion
-    old_initialize = instance_method(:initialize)
-    define_method(:initialize) do |name, options = {}|
-      old_initialize.bind(self).call(name, options)
-      @completion = options[:completion]
-    end
-    # def initialize(name, options = {})
-    #   old_initialize
-    # end
-
-    class << self
-      def completion(completion)
-        @completion = completion
+# add the 'completion:' option to Thor::Option, which
+# allows passing a shorter description for the shell
+module Fylla
+  module Thor
+    module Option
+      attr_accessor :completion
+      def initialize(name, options = {})
+        @completion = options[:completion]
+        super
       end
     end
   end

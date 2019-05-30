@@ -1,3 +1,13 @@
+# 0.4.0
+
+Add `completion:` option for `option` hash. Specify this if 
+`desc` or `banner` are not providing desired completion text
+
+# 0.2.0
+
+* add bash completion generation
+* add code coverage metrics
+
 # 0.1.0
 
 Initial version of Fylla
@@ -6,8 +16,3 @@ Initial version of Fylla
 * add zsh tests
 * add rubocop formatting
 * add yard documentation 
-
-# 0.2.0
-
-* add bash completion generation
-* add code coverage metrics

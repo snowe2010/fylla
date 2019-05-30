@@ -26,7 +26,21 @@ Or install it yourself as:
 
 ## Usage
 
-`Fylla` must be loaded before `Thor.start` is called in order for it to be used. 
+
+```ruby
+require 'thor'
+require 'fylla' # needs to come before anything that forces Thor configuration
+require 'cli' # has code like `class CLI < Thor` which forces Thor configuration
+
+Fylla.load('cli') # must come before `#start()`
+
+CLI.start(ARGV)
+```
+
+`Fylla` must be loaded before `Thor.start` is called in order for it to be used.
+
+`require 'fylla'` must be called before any Thor code is accessed _if you would like to use the `completion:` option_. 
+If you do not care about using the `completion:` flag in Options, then this requirement does not need to be met. 
 
 General use case will be to create a new subcommand or option that calls `Fylla.zsh_completion(self)`
 
@@ -36,6 +50,8 @@ use to do what you see fit.
 Same for bash completion.
 
 The only requirement for calling `Fylla.zsh_completion(self)` is that `Thor` has loaded all commands/options/etc.
+
+For some examples, you can reference the test folder
 
 ## Development
 
