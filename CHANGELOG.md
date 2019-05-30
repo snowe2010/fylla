@@ -1,3 +1,7 @@
+# 0.4.1
+
+Small bug when the descriptions contain single or double quotes (in zsh)
+
 # 0.4.0
 
 Add `completion:` option for `option` hash. Specify this if 
