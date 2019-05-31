@@ -97,7 +97,7 @@ module Fylla
         def generate_completion_string(command, class_options, context_name, style)
           builder = ''
           if command.is_a? ParsedSubcommand
-            class_options = (class_options + command.class_options).uniq
+            class_options = parse_options((class_options + command.class_options).uniq)
             builder += map_to_completion_string(command.commands,
                                                 context: context_name,
                                                 class_options: class_options,

@@ -78,7 +78,7 @@ class CompletionOptionTest < Minitest::Test
     expected = <<~'HERE'
       function _options_withopts {
         _arguments \
-          "--an_option=[]" \
+          "--an_option=[AN_OPTION]" \
           "-h[Show help information]" \
           "--help[Show help information]" \
           "1: :_commands" \
