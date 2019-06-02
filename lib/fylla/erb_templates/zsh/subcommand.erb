@@ -6,7 +6,7 @@ function _<%= @executable_name %><%= context_name %> {
     commands=(
     <%-# remove newlines and leading space on this loop -%>
     <%- command.commands.sort_by(&:name).each do |command| -%>
-      '<%= command.name %>:<%= command.description.gsub("'", %q|\\\\'|) %>'
+      '<%= command.name %>:<%= command.description.gsub("'", %q|'"'"'|) %>'
     <%- end -%>
     )
     _describe 'command' commands

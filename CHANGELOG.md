@@ -1,3 +1,11 @@
+# 0.4.3
+
+Fix null descriptions causing parsing failures 2.0 (`\` didn't work, trying `'"'"'`)
+
+# 0.4.2
+
+Fix null descriptions causing parsing failures
+
 # 0.4.1
 
 Small bug when the descriptions contain single or double quotes (in zsh)
