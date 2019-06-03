@@ -3,7 +3,7 @@ require_relative '../test_helper'
 require_relative 'test_commands/thor_test'
 
 module Zsh
-  module CompletionFlagTest
+  module WeirdDescriptionsTest
     class Main < ThorTest
       desc 'singlequote', "Description with single quote '"
       option :test, completion: "option with single quote '"
@@ -15,20 +15,20 @@ module Zsh
   end
 end
 
-class CompletionFlagTest < Minitest::Test
+class WeirdDescriptionsTest < Minitest::Test
   def setup
     Fylla.load('options')
   end
 
   def test_single_quote_escape
     expected = <<~'HERE'
-      'singlequote:Description with single quote \''
+      'singlequote:Description with single quote '"'"''
     HERE
 
     ARGV.clear
     ARGV << 'generate_completions'
     assert_output(matches(expected)) do
-      Zsh::CompletionFlagTest::Main.start(ARGV)
+      Zsh::WeirdDescriptionsTest::Main.start(ARGV)
     end
   end
 
@@ -40,7 +40,7 @@ class CompletionFlagTest < Minitest::Test
     ARGV.clear
     ARGV << 'generate_completions'
     assert_output(matches(expected)) do
-      Zsh::CompletionFlagTest::Main.start(ARGV)
+      Zsh::WeirdDescriptionsTest::Main.start(ARGV)
     end
   end
 end
