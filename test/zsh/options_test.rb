@@ -40,7 +40,6 @@ module Zsh
     end
 
     class ClassOptionNestedSub1 < ThorTest
-      class_option :klass
       desc 'withopts', 'subcommand that takes options'
       def withopts;end
     end
@@ -67,11 +66,9 @@ class OptionsTest < Minitest::Test
     expected = <<~'HERE'
       function _options_withopts {
         _arguments \
-          "--an_option=[AN_OPTION]" \
+          "--an_option[AN_OPTION]" \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
     HERE
 
@@ -86,12 +83,10 @@ class OptionsTest < Minitest::Test
     expected = <<~'HERE'
       function _options_withopts {
         _arguments \
-          "--an_option=[AN_OPTION]" \
-          "-a=[AN_OPTION]" \
+          "--an_option[AN_OPTION]" \
+          "-a[AN_OPTION]" \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
     HERE
 
@@ -106,13 +101,11 @@ class OptionsTest < Minitest::Test
     expected = <<~'HERE'
       function _options_withopts {
         _arguments \
-          "--an_option=[AN_OPTION]" \
-          "-a=[AN_OPTION]" \
-          "-b=[AN_OPTION]" \
+          "--an_option[AN_OPTION]" \
+          "-a[AN_OPTION]" \
+          "-b[AN_OPTION]" \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
     HERE
 
@@ -125,7 +118,7 @@ class OptionsTest < Minitest::Test
 
   def test_class_option
     expected = <<~'HERE'
-    "--klass=[KLASS]" \
+    "--klass[KLASS]" \
     HERE
 
     ARGV.clear
@@ -137,22 +130,41 @@ class OptionsTest < Minitest::Test
 
   def test_class_option_nested
     expected = <<~'HERE'
-      function _options_withopts {
+      function _options_sub {
+        local line
+      
+        local -a commands
+        commands=(
+          'help:Describe subcommands or one specific subcommand'
+          'withopts:subcommand that takes options'
+        )
+      
         _arguments \
-          "--an_option=[AN_OPTION]" \
-          "-a=[AN_OPTION]" \
-          "-b=[AN_OPTION]" \
+          "--klass[KLASS]" \
           "-h[Show help information]" \
           "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "1: : _describe 'command' commands" \
+          "*::arg:->args"
+      
+        case $state in
+          args)
+            case $line[1] in
+              help)
+                _options_sub_help
+              ;;
+              withopts)
+                _options_sub_withopts
+              ;;
+            esac
+          ;;
+        esac
       }
     HERE
 
     ARGV.clear
     ARGV << 'generate_completions'
-    # assert_output(matches(expected)) do
+    assert_output(matches(expected)) do
       Zsh::OptionsTest::ClassOptionNestedSubcommand.start(ARGV)
-    # end
+    end
   end
 end

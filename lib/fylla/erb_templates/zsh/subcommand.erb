@@ -1,35 +1,37 @@
 function _<%= @executable_name %><%= context_name %> {
   local line
   <%- unless command.commands.empty? %>
-    function _commands {
-    local -a commands
-    commands=(
-    <%-# remove newlines and leading space on this loop -%>
-    <%- command.commands.sort_by(&:name).each do |command| -%>
-      '<%= command.name %>:<%= command.description.gsub("'", %q|'"'"'|) %>'
-    <%- end -%>
-    )
-    _describe 'command' commands
-    }
+  local -a commands
+  commands=(
+  <%-# remove newlines and leading space on this loop -%>
+  <%- command.commands.sort_by(&:name).each do |command| -%>
+    '<%= command.name %>:<%= command.description.gsub("'", %q|'"'"'|) %>'
+  <%- end -%>
+  )
   <%- end %>
   _arguments \
   <%- unless class_options.nil? -%>
     <%- class_options.each do |option| -%>
       <%- option.aliases.each do |al| -%>
-    "-<%= al %>=[<%= option.description.gsub('"', %q|\\"|) %>]" \
+    "-<%= al %>[<%= option.description.gsub('"', %q|\\"|) %>]" \
       <%- end -%>
-    "--<%= option.name %>=[<%= option.description.gsub('"', %q|\\"|) %>]" \
+    "--<%= option.name %>[<%= option.description.gsub('"', %q|\\"|) %>]" \
     <%- end -%>
   <%- end -%>
     "-h[Show help information]" \
     "--help[Show help information]" \
-    "1: :_commands" \
-    "*::arg:->args"/.
-  case $line[1] in
-  <%- command.commands.sort_by(&:name).each do |command| -%>
-    <%= command.name %>)
-    _<%= @executable_name %><%= context_name %>_<%= command.name %>
+    "1: : _describe 'command' commands" \
+    "*::arg:->args"
+
+  case $state in
+    args)
+      case $line[1] in
+      <%- command.commands.sort_by(&:name).each do |command| -%>
+        <%= command.name %>)
+          _<%= @executable_name %><%= context_name %>_<%= command.name %>
+        ;;
+      <%- end -%>
+      esac
     ;;
-  <%- end -%>
   esac
 }

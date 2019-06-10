@@ -13,99 +13,94 @@ class CompletionTest < Minitest::Test
       function _test_help {
         _arguments \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
       function _test_generate_completions {
         _arguments \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
       function _test_sub_noopts {
         _arguments \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
       function _test_sub_withopts {
         _arguments \
-          "--an_option=[AN_OPTION]" \
+          "--an_option[AN_OPTION]" \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
       function _test_sub_help {
         _arguments \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
       function _test_sub {
         local line
       
-          function _commands {
-          local -a commands
-          commands=(
-            'help:Describe subcommands or one specific subcommand'
-            'noopts:subcommand that takes no options'
-            'withopts:subcommand that takes options'
-          )
-          _describe 'command' commands
-          }
+        local -a commands
+        commands=(
+          'help:Describe subcommands or one specific subcommand'
+          'noopts:subcommand that takes no options'
+          'withopts:subcommand that takes options'
+        )
       
         _arguments \
           "-h[Show help information]" \
           "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
-        case $line[1] in
-          help)
-          _test_sub_help
-          ;;
-          noopts)
-          _test_sub_noopts
-          ;;
-          withopts)
-          _test_sub_withopts
+          "1: : _describe 'command' commands" \
+          "*::arg:->args"
+
+        case $state in
+          args)
+            case $line[1] in
+              help)
+                _test_sub_help
+              ;;
+              noopts)
+                _test_sub_noopts
+              ;;
+              withopts)
+                _test_sub_withopts
+              ;;
+            esac
           ;;
         esac
       }
       function _test {
         local line
       
-          function _commands {
-          local -a commands
-          commands=(
-            'generate_completions:generate completions'
-            'help:Describe available commands or one specific command'
-            'sub:a subcommand'
-          )
-          _describe 'command' commands
-          }
+        local -a commands
+        commands=(
+          'generate_completions:generate completions'
+          'help:Describe available commands or one specific command'
+          'sub:a subcommand'
+        )
       
         _arguments \
           "-h[Show help information]" \
           "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
-        case $line[1] in
-          generate_completions)
-          _test_generate_completions
-          ;;
-          help)
-          _test_help
-          ;;
-          sub)
-          _test_sub
+          "1: : _describe 'command' commands" \
+          "*::arg:->args"
+
+        case $state in
+          args)
+            case $line[1] in
+              generate_completions)
+                _test_generate_completions
+              ;;
+              help)
+                _test_help
+              ;;
+              sub)
+                _test_sub
+              ;;
+            esac
           ;;
         esac
       }
+      _test "$@"
     HERE
 
     ARGV.clear

@@ -59,11 +59,9 @@ class CompletionOptionTest < Minitest::Test
     expected = <<~'HERE'
       function _options_withopts {
         _arguments \
-          "--an_option=[AN_OPTION]" \
+          "--an_option[AN_OPTION]" \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
     HERE
 
@@ -78,11 +76,9 @@ class CompletionOptionTest < Minitest::Test
     expected = <<~'HERE'
       function _options_withopts {
         _arguments \
-          "--an_option=[AN_OPTION]" \
+          "--an_option[AN_OPTION]" \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
     HERE
 
@@ -97,11 +93,9 @@ class CompletionOptionTest < Minitest::Test
     expected = <<~'HERE'
       function _options_withopts {
         _arguments \
-          "--an_option=[a completion]" \
+          "--an_option[a completion]" \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
     HERE
 
@@ -116,11 +110,9 @@ class CompletionOptionTest < Minitest::Test
     expected = <<~'HERE'
       function _options_withopts {
         _arguments \
-          "--an_option=[a description]" \
+          "--an_option[a description]" \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
     HERE
 
@@ -135,11 +127,9 @@ class CompletionOptionTest < Minitest::Test
     expected = <<~'HERE'
       function _options_withopts {
         _arguments \
-          "--an_option=[a banner]" \
+          "--an_option[a banner]" \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
     HERE
 

@@ -29,6 +29,7 @@ module Fylla
           builder = map_to_completion_string [command]
           completion = "#compdef _#{executable_name} #{executable_name}\n"
           completion += builder
+          completion += %Q(_#{executable_name} "$@")
           completion
         end
 
@@ -175,7 +176,7 @@ module Fylla
         def parse_options(options)
           options.map do |opt|
             description = opt.completion || opt.description || opt.banner || opt.name.to_s.upcase
-            ParsedOption.new(opt.name, description, opt.aliases)
+            ParsedOption.new(opt.name, description, opt.aliases, opt.enum, opt.filter)
           end
         end
       end

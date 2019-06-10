@@ -32,11 +32,9 @@ class CompletionFlagTest < Minitest::Test
     expected = <<~'HERE'
       function _options_completion {
         _arguments \
-          "--test=[completion]" \
+          "--test[completion]" \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
     HERE
 
@@ -51,11 +49,9 @@ class CompletionFlagTest < Minitest::Test
     expected = <<~'HERE'
       function _options_desc {
         _arguments \
-          "--test=[desc]" \
+          "--test[desc]" \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
     HERE
 
@@ -70,11 +66,9 @@ class CompletionFlagTest < Minitest::Test
     expected = <<~'HERE'
       function _options_banner {
         _arguments \
-          "--test=[banner]" \
+          "--test[banner]" \
           "-h[Show help information]" \
-          "--help[Show help information]" \
-          "1: :_commands" \
-          "*::arg:->args"/.
+          "--help[Show help information]"
       }
     HERE
 
