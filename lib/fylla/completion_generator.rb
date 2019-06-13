@@ -176,7 +176,7 @@ module Fylla
         def parse_options(options)
           options.map do |opt|
             description = opt.completion || opt.description || opt.banner || opt.name.to_s.upcase
-            ParsedOption.new(opt.name, description, opt.aliases, opt.enum, opt.filter)
+            ParsedOption.new(opt.name, description, opt.aliases, opt.enum, opt.filter, opt.type)
           end
         end
       end

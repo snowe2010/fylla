@@ -66,7 +66,7 @@ class OptionsTest < Minitest::Test
     expected = <<~'HERE'
       function _options_withopts {
         _arguments \
-          "--an_option[AN_OPTION]" \
+          "--an_option=[AN_OPTION]" \
           "-h[Show help information]" \
           "--help[Show help information]"
       }
@@ -83,8 +83,8 @@ class OptionsTest < Minitest::Test
     expected = <<~'HERE'
       function _options_withopts {
         _arguments \
-          "--an_option[AN_OPTION]" \
-          "-a[AN_OPTION]" \
+          "--an_option=[AN_OPTION]" \
+          "-a=[AN_OPTION]" \
           "-h[Show help information]" \
           "--help[Show help information]"
       }
@@ -101,9 +101,9 @@ class OptionsTest < Minitest::Test
     expected = <<~'HERE'
       function _options_withopts {
         _arguments \
-          "--an_option[AN_OPTION]" \
-          "-a[AN_OPTION]" \
-          "-b[AN_OPTION]" \
+          "--an_option=[AN_OPTION]" \
+          "-a=[AN_OPTION]" \
+          "-b=[AN_OPTION]" \
           "-h[Show help information]" \
           "--help[Show help information]"
       }

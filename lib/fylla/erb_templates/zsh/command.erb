@@ -2,21 +2,10 @@ function _<%= @executable_name %><%= context_name %> {
   _arguments \
   <%- unless command.options.nil? -%>
     <%- command.options.each do |option| -%>
-      <%- enums_exist = option.enum -%>
-      <%- filtered = option.filter -%>
       <%- desc = option.description.gsub('"', %q|\\"|) -%>
-      <%- if enums_exist -%>
-        <%- if filtered -%>
-        <%- actions = ": :_values -s , 'options' #{option.enum.join(' ')}" -%>
-        <%- else -%>
-        <%- actions = ": :_sequence -d compadd - #{option.enum.join(' ')}" -%>
-        <%- end -%>
-    "--<%= option.name %>=[<%= desc %>]<%= actions %>" \
-      <%- else -%>
-    "--<%= option.name %>[<%= desc %>]" \
-      <%- end -%>
+    "--<%= option.name %><%= option.equals_type %>[<%= desc %>]<%= option.action %>" \
       <%- option.aliases.each do |al| -%>
-    "-<%= al %><%= option.enum ? '=' : '' %>[<%= desc %>]<%= option.enum ? actions : '' %>" \
+    "-<%= al %><%= option.equals_type %>[<%= desc %>]<%= option.action %>" \
       <%- end -%>
     <%- end -%>
   <%- end -%>

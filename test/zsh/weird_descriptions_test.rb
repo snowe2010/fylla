@@ -34,7 +34,7 @@ class WeirdDescriptionsTest < Minitest::Test
 
   def test_double_quote_escape
     expected = <<~'HERE'
-    "--test[option with double quote \"]" \
+    "--test=[option with double quote \"]" \
     HERE
 
     ARGV.clear

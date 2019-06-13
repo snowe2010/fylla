@@ -27,7 +27,7 @@ class CompletionTest < Minitest::Test
       }
       function _test_sub_withopts {
         _arguments \
-          "--an_option[AN_OPTION]" \
+          "--an_option=[AN_OPTION]" \
           "-h[Show help information]" \
           "--help[Show help information]"
       }
