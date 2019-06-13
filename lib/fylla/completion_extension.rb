@@ -9,8 +9,9 @@ module Fylla
     module Option
       attr_accessor :completion, :filter
       def initialize(name, options = {})
-        @completion = options[:completion]
-        @filter = options[:filter]
+        @completion = options[:fylla]&.[](:completion)
+        @filter = options[:fylla]&.[](:filter)
+        @filter = true if @filter.nil?
         super
       end
     end
