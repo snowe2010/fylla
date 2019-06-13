@@ -1,3 +1,15 @@
+# 0.5.0
+
+Move `completion:` option into a new `fylla:` hash option to allow for expanding the 
+features of fylla. 
+
+Modify the `zsh_completion` feature to generate completion for `enum:` options. 
+  
+  * By default it will remove duplicate matches when completing
+  
+Add new `filter:` option into `fylla:` in order to allow _not_ removing duplicate 
+matches when completing `enum:` options
+
 # 0.4.3
 
 Fix null descriptions causing parsing failures 2.0 (`\` didn't work, trying `'"'"'`)
