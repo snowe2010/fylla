@@ -6,10 +6,10 @@ module Zsh
   module WeirdDescriptionsTest
     class Main < ThorTest
       desc 'singlequote', "Description with single quote '"
-      option :test, completion: "option with single quote '"
+      option :test, fylla: {completion: "option with single quote '"}
       def singlequote; end
       desc 'doublequote', 'Description with double quote "'
-      option :test, completion: 'option with double quote "'
+      option :test, fylla: {completion: 'option with double quote "'}
       def doublequote; end
     end
   end

@@ -7,7 +7,7 @@ module Zsh
     class Main < ThorTest
       desc 'completion', 'use completion flag for description'
       option :test,
-             completion: "completion",
+             fylla: { completion: "completion" },
              desc: "shouldn't be used if completion is present",
              banner: "shouldn't be used if completion is present"
       def completion; end

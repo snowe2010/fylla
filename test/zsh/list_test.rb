@@ -25,7 +25,7 @@ class ListTest < Minitest::Test
     expected = <<~'HERE'
       function _options_completion {
         _arguments \
-          "--test=[TEST]:*: :(enum1 enum2 enum3)" \
+          "--test=[TEST]: :_values -s , 'options' enum1 enum2 enum3" \
           "-h[Show help information]" \
           "--help[Show help information]"
       }

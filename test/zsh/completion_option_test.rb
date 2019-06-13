@@ -23,7 +23,8 @@ module Zsh
     end
     class Subcommand2 < ThorTest
       desc 'withopts', 'subcommand that takes options'
-      option :an_option, completion: "a completion"
+      option :an_option, fylla: {completion: "a completion"}
+
       def withopts
         puts 'with options'
       end
@@ -31,6 +32,7 @@ module Zsh
     class Subcommand3 < ThorTest
       desc 'withopts', 'subcommand that takes options'
       option :an_option, desc: "a description"
+
       def withopts
         puts 'with options'
       end
@@ -38,6 +40,7 @@ module Zsh
     class Subcommand4 < ThorTest
       desc 'withopts', 'subcommand that takes options'
       option :an_option, banner: "a banner"
+
       def withopts
         puts 'with options'
       end
