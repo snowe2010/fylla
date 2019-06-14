@@ -1,3 +1,10 @@
+# 0.5.1
+
+* Fix completions for string enums, only complete a single arg, rather than multiple
+args.
+
+* Don't put = when option is a boolean
+ 
 # 0.5.0
 
 Move `completion:` option into a new `fylla:` hash option to allow for expanding the 
