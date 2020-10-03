@@ -154,7 +154,7 @@ module Fylla
         # @param template [String] an ERB template
         # @param bind [Binding] a binding to a context
         def create_completion_string(template, bind)
-          template = ERB.new(template, nil, '-<>')
+          template = ERB.new(template, trim_mode:'-<>')
           template.result(bind)
         end
 
