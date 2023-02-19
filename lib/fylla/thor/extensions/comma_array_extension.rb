@@ -1,4 +1,4 @@
-require 'thor'
+require "thor"
 
 # Modify how Thor parses array arguments to be POSIX standard per
 # getopt_long(3)
@@ -6,8 +6,9 @@ require 'thor'
 module Fylla
   module Thor
     module Arguments
-      def parse_array(name)
+      def parse_array(_name)
         return shift if peek.is_a?(Array)
+
         array = []
         if peek.include? ","
           array.push(*shift.split(","))

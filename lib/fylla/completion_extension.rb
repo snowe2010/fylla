@@ -1,4 +1,4 @@
-require 'thor'
+require "thor"
 
 # add more options to Thor::Option
 #
@@ -8,6 +8,7 @@ module Fylla
   module Thor
     module Option
       attr_accessor :completion, :filter
+
       def initialize(name, options = {})
         @completion = options[:fylla]&.[](:completion)
         @filter = options[:fylla]&.[](:filter)

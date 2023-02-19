@@ -1,21 +1,20 @@
-lib = File.expand_path('lib', __dir__)
+lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'fylla/version'
+require "fylla/version"
 
-# rubocop:disable BlockLength
 Gem::Specification.new do |spec|
-  spec.name = 'fylla'
+  spec.name = "fylla"
   spec.version = Fylla::VERSION
-  spec.authors = ['Tyler Thrailkill']
-  spec.email = ['tyler.b.thrailkill@gmail.com']
+  spec.authors = ["Tyler Thrailkill"]
+  spec.email = ["tyler.b.thrailkill@gmail.com"]
 
-  spec.summary = 'Adds functions for generating autocomplete scripts for Thor applications'
-  spec.description = 'Fylla generates zsh and bash autocomplete scripts for Thor CLI applications.'
-  spec.homepage = 'https://github.com/snowe2010/fylla'
-  spec.license = 'MIT'
+  spec.summary = "Adds functions for generating autocomplete scripts for Thor applications"
+  spec.description = "Fylla generates zsh and bash autocomplete scripts for Thor CLI applications."
+  spec.homepage = "https://github.com/snowe2010/fylla"
+  spec.license = "MIT"
 
-  spec.metadata['yard.run'] = 'yri' # use "yard" to build full HTML docs.
-  spec.metadata['changelog_uri'] = 'https://github.com/snowe2010/fylla/blob/master/CHANGELOG.md'
+  spec.metadata["yard.run"] = "yri" # use "yard" to build full HTML docs.
+  spec.metadata["changelog_uri"] = "https://github.com/snowe2010/fylla/blob/master/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -25,15 +24,14 @@ Gem::Specification.new do |spec|
     end
   end
 
-  spec.bindir = 'exe'
-  spec.executables = spec.files.grep(%r{^exe/}) {|f| File.basename(f)}
-  spec.require_paths = ['lib']
+  spec.bindir = "exe"
+  spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
 
-  spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'codecov', '~> 0.1.14'
-  spec.add_development_dependency 'minitest', '~> 5.0'
-  spec.add_development_dependency 'minitest-hooks', '~> 1.5.0'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_dependency 'thor', '>= 0.19.0'
+  spec.add_development_dependency "bundler", "~> 2.0"
+  spec.add_development_dependency "codecov", "~> 0.1.14"
+  spec.add_development_dependency "minitest", "~> 5.0"
+  spec.add_development_dependency "minitest-hooks", "~> 1.5.0"
+  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_dependency "thor", ">= 0.19.0"
 end
-# rubocop:enable BlockLength

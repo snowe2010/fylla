@@ -1,10 +1,9 @@
-require_relative '../test_helper'
-require_relative 'test_commands/plain_subcommand'
-
+require_relative "../test_helper"
+require_relative "test_commands/plain_subcommand"
 
 class CompletionTest < Minitest::Test
   def setup
-    Fylla.load('test')
+    Fylla.load("test")
   end
 
   def test_cli_start_completion_generator
@@ -38,14 +37,14 @@ class CompletionTest < Minitest::Test
       }
       function _test_sub {
         local line
-      
+
         local -a commands
         commands=(
           'help:Describe subcommands or one specific subcommand'
           'noopts:subcommand that takes no options'
           'withopts:subcommand that takes options'
         )
-      
+
         _arguments \
           "-h[Show help information]" \
           "--help[Show help information]" \
@@ -70,14 +69,14 @@ class CompletionTest < Minitest::Test
       }
       function _test {
         local line
-      
+
         local -a commands
         commands=(
           'generate_completions:generate completions'
           'help:Describe available commands or one specific command'
           'sub:a subcommand'
         )
-      
+
         _arguments \
           "-h[Show help information]" \
           "--help[Show help information]" \
@@ -104,7 +103,7 @@ class CompletionTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(expected) do
       Zsh::PlainSubcommands::Main.start(ARGV)
     end
