@@ -1,3 +1,8 @@
+# 0.5.2
+
+Fix deprecation warnings in ERB
+Switch deploy to GitHub Actions
+
 # 0.5.1
 
 * Fix completions for string enums, only complete a single arg, rather than multiple

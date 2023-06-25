@@ -1,9 +1,9 @@
-require_relative '../test_helper'
-require_relative 'bash_clis/cli'
+require_relative "../test_helper"
+require_relative "bash_clis/cli"
 
 class BashTest < Minitest::Test
   def setup
-    Fylla.load('test')
+    Fylla.load("test")
   end
 
   def test_bash_single_subcommand
@@ -34,7 +34,7 @@ class BashTest < Minitest::Test
       }
       _test() {
         local i=1 subcommand_index
-      
+
         # find the subcommand
         while [[ $i -lt $COMP_CWORD ]]; do
           local s="${COMP_WORDS[i]}"
@@ -46,7 +46,7 @@ class BashTest < Minitest::Test
           esac
           (( i++ ))
         done
-      
+
         while [[ $subcommand_index -lt $COMP_CWORD ]]; do
           local s="${COMP_WORDS[subcommand_index]}"
           case "$s" in
@@ -66,7 +66,7 @@ class BashTest < Minitest::Test
           esac
           (( subcommand_index++ ))
         done
-      
+
         local cur="${COMP_WORDS[COMP_CWORD]}"
         COMPREPLY=($(compgen -W "help generate plain " -- "$cur"))
       }
@@ -74,7 +74,7 @@ class BashTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate'
+    ARGV << "generate"
     assert_output(expected) do
       Bash::CLI::Subcommand.start(ARGV)
     end
@@ -109,7 +109,7 @@ class BashTest < Minitest::Test
       }
       _test() {
         local i=1 subcommand_index
-      
+
         # find the subcommand
         while [[ $i -lt $COMP_CWORD ]]; do
           local s="${COMP_WORDS[i]}"
@@ -121,7 +121,7 @@ class BashTest < Minitest::Test
           esac
           (( i++ ))
         done
-      
+
         while [[ $subcommand_index -lt $COMP_CWORD ]]; do
           local s="${COMP_WORDS[subcommand_index]}"
           case "$s" in
@@ -141,7 +141,7 @@ class BashTest < Minitest::Test
           esac
           (( subcommand_index++ ))
         done
-      
+
         local cur="${COMP_WORDS[COMP_CWORD]}"
         COMPREPLY=($(compgen -W "help generate plain " -- "$cur"))
       }
@@ -149,7 +149,7 @@ class BashTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate'
+    ARGV << "generate"
     assert_output(expected) do
       Bash::CLI::SubcommandWithOptions.start(ARGV)
     end
@@ -200,7 +200,7 @@ class BashTest < Minitest::Test
       }
       _test_subcommand() {
         local i=1 subcommand_index
-      
+
         # find the subcommand
         while [[ $i -lt $COMP_CWORD ]]; do
           local s="${COMP_WORDS[i]}"
@@ -212,7 +212,7 @@ class BashTest < Minitest::Test
           esac
           (( i++ ))
         done
-      
+
         while [[ $subcommand_index -lt $COMP_CWORD ]]; do
           local s="${COMP_WORDS[subcommand_index]}"
           case "$s" in
@@ -229,7 +229,7 @@ class BashTest < Minitest::Test
           esac
           (( subcommand_index++ ))
         done
-      
+
         local cur="${COMP_WORDS[COMP_CWORD]}"
         COMPREPLY=($(compgen -W "plain help " -- "$cur"))
       }
@@ -252,7 +252,7 @@ class BashTest < Minitest::Test
       }
       _test_subcommand2() {
         local i=1 subcommand_index
-      
+
         # find the subcommand
         while [[ $i -lt $COMP_CWORD ]]; do
           local s="${COMP_WORDS[i]}"
@@ -264,7 +264,7 @@ class BashTest < Minitest::Test
           esac
           (( i++ ))
         done
-      
+
         while [[ $subcommand_index -lt $COMP_CWORD ]]; do
           local s="${COMP_WORDS[subcommand_index]}"
           case "$s" in
@@ -281,13 +281,13 @@ class BashTest < Minitest::Test
           esac
           (( subcommand_index++ ))
         done
-      
+
         local cur="${COMP_WORDS[COMP_CWORD]}"
         COMPREPLY=($(compgen -W "plain help " -- "$cur"))
       }
       _test() {
         local i=1 subcommand_index
-      
+
         # find the subcommand
         while [[ $i -lt $COMP_CWORD ]]; do
           local s="${COMP_WORDS[i]}"
@@ -299,7 +299,7 @@ class BashTest < Minitest::Test
           esac
           (( i++ ))
         done
-      
+
         while [[ $subcommand_index -lt $COMP_CWORD ]]; do
           local s="${COMP_WORDS[subcommand_index]}"
           case "$s" in
@@ -325,14 +325,14 @@ class BashTest < Minitest::Test
           esac
           (( subcommand_index++ ))
         done
-      
+
         local cur="${COMP_WORDS[COMP_CWORD]}"
         COMPREPLY=($(compgen -W "help generate plain subcommand subcommand2 --class-opt" -- "$cur"))
       }
       complete -F _test test
     HERE
     ARGV.clear
-    ARGV << 'generate'
+    ARGV << "generate"
     assert_output(expected) do
       Bash::CLI::SubcommandWithNestedSubcommandsAndOptions.start(ARGV)
     end

@@ -1,26 +1,26 @@
-require_relative '../test_helper'
+require_relative "../test_helper"
 # require_relative 'test_commands/plain_subcommand'
-require_relative 'test_commands/thor_test'
+require_relative "test_commands/thor_test"
 
 module Zsh
   module EnumTest
     class Main < ThorTest
-      desc 'command', 'command'
+      desc "command", "command"
       option :test,
-             enum: %w(enum1 enum2 enum3)
+             enum: %w[enum1 enum2 enum3]
       def command; end
-      desc 'command2', 'command2'
+      desc "command2", "command2"
       option :test,
              type: :array,
-             enum: %w(enum1 enum2 enum3)
+             enum: %w[enum1 enum2 enum3]
       def command2; end
-      desc 'command3', 'command3'
+      desc "command3", "command3"
       option :test,
              type: :array,
-             enum: %w(enum1 enum2 enum3),
+             enum: %w[enum1 enum2 enum3],
              fylla: { filter: false }
       def command3; end
-      desc 'command4', 'command4'
+      desc "command4", "command4"
       option :test
       def command4; end
     end
@@ -29,7 +29,7 @@ end
 
 class EnumTest < Minitest::Test
   def setup
-    Fylla.load('options')
+    Fylla.load("options")
   end
 
   # default type is string
@@ -44,7 +44,7 @@ class EnumTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(matches(expected)) do
       Zsh::EnumTest::Main.start(ARGV)
     end
@@ -61,7 +61,7 @@ class EnumTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(matches(expected)) do
       Zsh::EnumTest::Main.start(ARGV)
     end
@@ -78,7 +78,7 @@ class EnumTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(matches(expected)) do
       Zsh::EnumTest::Main.start(ARGV)
     end
@@ -95,7 +95,7 @@ class EnumTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(matches(expected)) do
       Zsh::EnumTest::Main.start(ARGV)
     end

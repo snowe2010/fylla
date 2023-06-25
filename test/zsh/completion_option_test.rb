@@ -1,61 +1,65 @@
-require_relative '../test_helper'
+require_relative "../test_helper"
 # require_relative 'test_commands/plain_subcommand'
-require_relative 'test_commands/thor_test'
+require_relative "test_commands/thor_test"
 
 module Zsh
   module CompletionOptionTest
     class Subcommand1 < ThorTest
-      desc 'withopts', 'subcommand that takes options'
+      desc "withopts", "subcommand that takes options"
       option :an_option
 
       def withopts
-        puts 'with options'
+        puts "with options"
       end
     end
+
     class Subcommand1Boolean < ThorTest
-      desc 'withopts', 'subcommand that takes options'
+      desc "withopts", "subcommand that takes options"
       option :an_option,
              type: :boolean
 
       def withopts
-        puts 'with options'
+        puts "with options"
       end
     end
+
     class Subcommand2 < ThorTest
-      desc 'withopts', 'subcommand that takes options'
-      option :an_option, fylla: {completion: "a completion"}
+      desc "withopts", "subcommand that takes options"
+      option :an_option, fylla: { completion: "a completion" }
 
       def withopts
-        puts 'with options'
+        puts "with options"
       end
     end
+
     class Subcommand3 < ThorTest
-      desc 'withopts', 'subcommand that takes options'
+      desc "withopts", "subcommand that takes options"
       option :an_option, desc: "a description"
 
       def withopts
-        puts 'with options'
+        puts "with options"
       end
     end
+
     class Subcommand4 < ThorTest
-      desc 'withopts', 'subcommand that takes options'
+      desc "withopts", "subcommand that takes options"
       option :an_option, banner: "a banner"
 
       def withopts
-        puts 'with options'
+        puts "with options"
       end
     end
 
     class Main < ThorTest
-      desc 'sub', 'a subcommand'
-      subcommand 'sub', Subcommand1
+      desc "sub", "a subcommand"
+      subcommand "sub", Subcommand1
     end
   end
 end
 
 class CompletionOptionTest < Minitest::Test
   def setup
-    Fylla.load('options')
+    Fylla.load("options")
   end
 
   def test_options_no_description
@@ -69,7 +73,7 @@ class CompletionOptionTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(matches(expected)) do
       Zsh::CompletionOptionTest::Subcommand1.start(ARGV)
     end
@@ -86,7 +90,7 @@ class CompletionOptionTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(matches(expected)) do
       Zsh::CompletionOptionTest::Subcommand1Boolean.start(ARGV)
     end
@@ -103,7 +107,7 @@ class CompletionOptionTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(matches(expected)) do
       Zsh::CompletionOptionTest::Subcommand2.start(ARGV)
     end
@@ -120,7 +124,7 @@ class CompletionOptionTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(matches(expected)) do
       Zsh::CompletionOptionTest::Subcommand3.start(ARGV)
     end
@@ -137,7 +141,7 @@ class CompletionOptionTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(matches(expected)) do
       Zsh::CompletionOptionTest::Subcommand4.start(ARGV)
     end

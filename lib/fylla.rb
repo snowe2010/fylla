@@ -1,10 +1,10 @@
-require 'fylla/version'
-require 'fylla/completion_generator'
-require 'fylla/parsed_command'
-require 'fylla/parsed_subcommand'
-require 'fylla/completion_extension'
-require 'fylla/thor/extensions/comma_array_extension'
-require 'thor'
+require "fylla/version"
+require "fylla/completion_generator"
+require "fylla/parsed_command"
+require "fylla/parsed_subcommand"
+require "fylla/completion_extension"
+require "fylla/thor/extensions/comma_array_extension"
+require "thor"
 
 # We _must prepend before thor loads_ Ideally this is at require time...
 ::Thor::Option.prepend Fylla::Thor::Option

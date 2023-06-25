@@ -1,22 +1,22 @@
-require_relative '../test_helper'
+require_relative "../test_helper"
 # require_relative 'test_commands/plain_subcommand'
-require_relative 'test_commands/thor_test'
+require_relative "test_commands/thor_test"
 
 module Zsh
   module CompletionFlagTest
     class Main < ThorTest
-      desc 'completion', 'use completion flag for description'
+      desc "completion", "use completion flag for description"
       option :test,
              fylla: { completion: "completion" },
              desc: "shouldn't be used if completion is present",
              banner: "shouldn't be used if completion is present"
       def completion; end
-      desc 'desc', 'use description flag for description'
+      desc "desc", "use description flag for description"
       option :test,
              desc: "desc",
              banner: "shouldn't be used if desc is present"
       def desc; end
-      desc 'banner', 'use banner flag for description'
+      desc "banner", "use banner flag for description"
       option :test, banner: "banner"
       def banner; end
     end
@@ -25,7 +25,7 @@ end
 
 class CompletionFlagTest < Minitest::Test
   def setup
-    Fylla.load('options')
+    Fylla.load("options")
   end
 
   def test_completion_flag_provides_alternate_description
@@ -39,7 +39,7 @@ class CompletionFlagTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(matches(expected)) do
       Zsh::CompletionFlagTest::Main.start(ARGV)
     end
@@ -56,7 +56,7 @@ class CompletionFlagTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(matches(expected)) do
       Zsh::CompletionFlagTest::Main.start(ARGV)
     end
@@ -73,7 +73,7 @@ class CompletionFlagTest < Minitest::Test
     HERE
 
     ARGV.clear
-    ARGV << 'generate_completions'
+    ARGV << "generate_completions"
     assert_output(matches(expected)) do
       Zsh::CompletionFlagTest::Main.start(ARGV)
     end

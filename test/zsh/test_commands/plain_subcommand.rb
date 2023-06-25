@@ -1,23 +1,23 @@
-require_relative 'thor_test'
+require_relative "thor_test"
 
 module Zsh
   module PlainSubcommands
     class Subcommand < ThorTest
-      desc 'noopts', 'subcommand that takes no options'
+      desc "noopts", "subcommand that takes no options"
       def noopts
-        puts 'noopts'
+        puts "noopts"
       end
 
-      desc 'withopts', 'subcommand that takes options'
+      desc "withopts", "subcommand that takes options"
       option :an_option
       def withopts
-        puts 'with options'
+        puts "with options"
       end
     end
 
     class Main < ThorTest
-      desc 'sub', 'a subcommand'
-      subcommand 'sub', Subcommand
+      desc "sub", "a subcommand"
+      subcommand "sub", Subcommand
     end
   end
 end

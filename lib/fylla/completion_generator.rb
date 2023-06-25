@@ -1,7 +1,7 @@
-require_relative 'parsed_option'
-require_relative 'parsed_command'
-require_relative 'parsed_subcommand'
-require 'erb'
+require_relative "parsed_option"
+require_relative "parsed_command"
+require_relative "parsed_subcommand"
+require "erb"
 
 module Fylla
   module Thor
@@ -29,7 +29,7 @@ module Fylla
           builder = map_to_completion_string [command]
           completion = "#compdef _#{executable_name} #{executable_name}\n"
           completion += builder
-          completion += %Q(_#{executable_name} "$@")
+          completion += %(_#{executable_name} "$@")
           completion
         end
 
@@ -44,7 +44,7 @@ module Fylla
           command = create_command_map all_commands, subcommand_classes
 
           builder = map_to_completion_string [command], style: :bash
-          completion = ''
+          completion = ""
           completion += builder
           completion += "complete -F _#{executable_name} #{executable_name}\n"
           completion
@@ -68,10 +68,10 @@ module Fylla
         # @param class_options [List<Thor::Option>]
         #   a list of global or class level options for the current context
         def map_to_completion_string(commands,
-                                     context: '',
+                                     context: "",
                                      class_options: [],
                                      style: :zsh)
-          builder = ''
+          builder = ""
           commands.each do |command|
             context_name = generate_context_name(context, command)
             result = generate_completion_string(command, class_options, context_name, style)
@@ -88,7 +88,7 @@ module Fylla
         #   current command we are generating documentation for
         def generate_context_name(context, command)
           command_name = if command.name.nil? || command.name.empty?
-                           ''
+                           ""
                          else
                            "_#{command.name}"
                          end
@@ -96,7 +96,7 @@ module Fylla
         end
 
         def generate_completion_string(command, class_options, context_name, style)
-          builder = ''
+          builder = ""
           if command.is_a? ParsedSubcommand
             class_options = parse_options((class_options + command.class_options).uniq)
             builder += map_to_completion_string(command.commands,
@@ -123,15 +123,17 @@ module Fylla
         # @param subcommand_map [Hash<String, Class < Thor>]
         #   a map indicating the subcommands and their respective classes
         def recursively_find_commands(command_map, subcommand_map)
-          map = Hash[command_map.map {|k, v| [v, subcommand_map[k]]}]
+          map = Hash[command_map.map { |k, v| [v, subcommand_map[k]] }]
           map.map do |command, subcommand_class|
             if subcommand_class.nil?
               ancestor_name = command.ancestor_name if command.respond_to? :ancestor_name
               options = parse_options(command.options.values)
               ParsedCommand.new(ancestor_name, command.description, command.name, options)
             else
-              commands = recursively_find_commands subcommand_class.commands, subcommand_class.subcommand_classes
-              ParsedSubcommand.new(command.name, command.description, commands, subcommand_class.class_options.values)
+              commands = recursively_find_commands subcommand_class.commands,
+                                                   subcommand_class.subcommand_classes
+              ParsedSubcommand.new(command.name, command.description, commands,
+                                   subcommand_class.class_options.values)
             end
           end
         end
@@ -145,7 +147,7 @@ module Fylla
         # (see #recursively_find_commands) for more documentation
         def create_command_map(command_map, subcommand_map)
           command_map = recursively_find_commands command_map, subcommand_map
-          ParsedSubcommand.new(nil, '', command_map, class_options.values)
+          ParsedSubcommand.new(nil, "", command_map, class_options.values)
         end
 
         # Helper method to load an [ERB] template
@@ -154,7 +156,7 @@ module Fylla
         # @param template [String] an ERB template
         # @param bind [Binding] a binding to a context
         def create_completion_string(template, bind)
-          template = ERB.new(template, trim_mode:'-<>')
+          template = ERB.new(template, trim_mode: "-<>")
           template.result(bind)
         end
 
