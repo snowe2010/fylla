@@ -4,7 +4,7 @@
 
 # Fylla
 
-Fylla, the Norse word for `complete`, is an autocompletion script generator for the [Thor](whatisthor.com) framework.
+Fylla, the Norse word for `complete`, is an autocompletion script generator for the [Thor](http://whatisthor.com) framework.
 
 It currently generates zsh completion scripts, but will soon have support for bash scripts as well. 
 
